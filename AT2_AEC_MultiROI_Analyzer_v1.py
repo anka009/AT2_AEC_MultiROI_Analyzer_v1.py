@@ -721,7 +721,7 @@ cal_col1, cal_col2, cal_col3 = st.columns(3)
 with cal_col1:
     if st.button("🎯 AEC-Kalibrierpunkte zurücksetzen"):
         st.session_state.aec_cal_points = []
-        st.rerun()
+        st.experimental_rerun()
 
 with cal_col2:
     if st.button("🧬 AEC erkennen"):
@@ -770,7 +770,7 @@ with cal_col2:
 with cal_col3:
     if st.button("🔄 ROI-Erkennung neu starten"):
         reset_current_roi()
-        st.rerun()
+        st.experimental_rerun()
 
 
 # ============================================================
@@ -850,7 +850,7 @@ if coords:
     # ------------------------
     if mode == "🎯 AEC-Kalibrierpunkt":
         st.session_state.aec_cal_points.append((x, y))
-        st.rerun()
+        st.experimental_rerun()
 
     # ------------------------
     # Add
@@ -858,7 +858,7 @@ if coords:
     elif mode == "➕ Zelle hinzufügen":
         st.session_state.history.append(snapshot())
         st.session_state.roi_points.append((x, y))
-        st.rerun()
+        st.experimental_rerun()
 
     # ------------------------
     # Delete
@@ -874,7 +874,7 @@ if coords:
             st.session_state.history.append(snapshot())
             removed = st.session_state.roi_points.pop(i)
             st.toast(f"Zelle {i + 1} gelöscht: {removed}")
-            st.rerun()
+            st.experimental_rerun()
         else:
             st.warning("Keine Zelle in der Nähe des Klicks.")
 
@@ -903,7 +903,7 @@ if coords:
                 "Jetzt zwei Zellzentren anklicken: "
                 "erstes Zentrum, dann zweites Zentrum."
             )
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ============================================================
@@ -948,9 +948,9 @@ if st.session_state.get("split_stage", 0) == 1:
                     st.session_state.split_stage = 0
 
                     st.success("✂️ Siamese Zelle in 2 Zellen geteilt.")
-                    st.rerun()
+                    st.experimental_rerun()
 
-                st.rerun()
+                st.experimental_rerun()
 
 
 # ============================================================
@@ -962,13 +962,13 @@ b1, b2, b3, b4 = st.columns(4)
 with b1:
     if st.button("↶ Undo"):
         undo()
-        st.rerun()
+        st.experimental_rerun()
 
 with b2:
     if st.button("🧹 Alle Zellen entfernen"):
         st.session_state.history.append(snapshot())
         st.session_state.roi_points = []
-        st.rerun()
+        st.experimental_rerun()
 
 with b3:
     if st.button("↩️ Auto-Erkennung wiederherstellen"):
@@ -976,7 +976,7 @@ with b3:
         st.session_state.roi_points = list(
             st.session_state.auto_points
         )
-        st.rerun()
+        st.experimental_rerun()
 
 with b4:
     if st.button("✅ ROI fertig"):
@@ -1038,7 +1038,7 @@ with nav1:
     if st.button("⬅️ Vorheriges ROI", disabled=(idx == 0)):
         st.session_state.current_roi_index -= 1
         reset_current_roi()
-        st.rerun()
+        st.experimental_rerun()
 
 with nav2:
     st.write(
@@ -1054,7 +1054,7 @@ with nav3:
     ):
         st.session_state.current_roi_index += 1
         reset_current_roi()
-        st.rerun()
+        st.experimental_rerun()
 
 
 # ============================================================
